@@ -16,6 +16,12 @@ dotenv.config({ path: "./config.env" });
 // DB Connection (leaving catch method for further use cases)
 const DB = process.env.DATABASE.replace("<PASSWORD>", process.env.DB_PASSWORD);
 
+// Checking for Redis connection
+if (!process.env.REDIS_HOST) {
+  console.log("You must specify Redis connection info in the .env file");
+  process.exit(1);
+}
+
 mongoose
   .connect(DB, {
     useNewUrlParser: true,
