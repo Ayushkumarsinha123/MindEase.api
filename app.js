@@ -3,9 +3,10 @@ const fs = require("fs");
 const morgan = require("morgan");
 const express = require("express");
 
-const tourRouter = require("./routes/tourRoutes");
+const mindAgentRouter = require("./routes/mindAgentRoutes");
 const AppError = require("./utils/appError");
 const globalErrorHandler = require("./controllers/errorController");
+const { checkCacheData } = require("./middlewares/cacheMiddleware");
 
 const app = express();
 
@@ -14,7 +15,8 @@ if (process.env.NODE_ENV === "development") app.use(morgan("dev"));
 app.use(express.json());
 
 // Mounting the Router
-app.use("/api/v1/tours", tourRouter);
+app.use(checkCacheData);
+app.use("/api/v1/mind-agent", mindAgentRouter);
 
 // app.all() for all the HTTP methods
 app.all("*", (req, res, next) => {
