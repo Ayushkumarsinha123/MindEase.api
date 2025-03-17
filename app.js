@@ -22,6 +22,7 @@ app.use(express.json());
 // Mounting the Router
 app.use(checkCacheData);
 app.use("/api/v1/mind-agent", mindAgentRouter);
+app.use("/api/v1/users", userRouter);
 
 // app.all() for all the HTTP methods
 app.all("*", (req, res, next) => {
