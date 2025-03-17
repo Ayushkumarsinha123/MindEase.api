@@ -8,7 +8,12 @@ const AppError = require("./utils/appError");
 const globalErrorHandler = require("./controllers/errorController");
 const { checkCacheData } = require("./middlewares/cacheMiddleware");
 
+const cors = require("cors");
+
 const app = express();
+
+// cors setup
+app.use(cors());
 
 // Middlewares
 if (process.env.NODE_ENV === "development") app.use(morgan("dev"));
